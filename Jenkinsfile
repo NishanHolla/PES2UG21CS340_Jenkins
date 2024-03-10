@@ -1,6 +1,7 @@
 pipeline{
-  agent any{
-    stages('Build'){
+  agent any
+    stages{
+      stage('Build'){
       steps{
         sh 'g++ main.cpp -o output'
       }
@@ -10,12 +11,13 @@ pipeline{
       sh './output'
       }
     }
-  }
   stage('Deploy'){
     steps{
+      sh 'ls non_existent_file.txt'
       echo 'Deploy'
     }
   }
+}
   post{
     failure{
       echo 'Pipeline failed'
